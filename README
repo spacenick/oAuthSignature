@@ -1,0 +1,43 @@
+oAuth Signature Maker Class for PHP
+
+All the attributes are public, no head scrapping.
+
+USE CASE 
+-------
+
+You can use this class to quickly build oAuth signature that are compatible with 1.0a last spec.
+
+You can use it either server side, or client side.                          
+
+
+
+
+
+
+USAGE (Example)
+-----
+
+		$signatureObj = new oAuthSignature();
+		
+		$signatureObj->http_method = "POST";             
+		// We're giving all the POST data to the extra_params field.
+		$signatureObj->extra_params = array_merge($_POST);
+		$signatureObj->oauth_params = array("oauth_consumer_key" => $consumer_key, "oauth_timestamp" => $timestamp, "oauth_nonce" => $nonce, "oauth_version" => $version, "oauth_signature_method" => $signature_method, "oauth_verifier" => $oauth_verifier, "oauth_token" => $oauth_token);
+		$signatureObj->uri = $host; // ex : http://api.myawesomewebsite.com/my/method     
+		
+		// If you don't have any token secret (first steps of oAuth Dance)
+		$signatureObj->secret_params = array("consumer_secret" => "my_consumer_secret");
+		// If you the token secret
+		$signatureObj->secret_params = array("consumer_secret" => "my_consumer_secret", "token_secret" => "my token secret which can be Request Token Secret or Access Token Secret.");
+		
+		
+
+   		$signature = $signatureObj->buildSignature();   
+
+
+WARNING
+-------
+http label (http or https) and server name must be lowercase according to oAuth 1.0a spec when defining uri field.
+=> HTTP://API.MYSERVER.COM/mymethod has to be http://api.myserver.com/mymethod         
+
+
