@@ -1,6 +1,6 @@
 <?php
 
-/* oAuth Signature OOP implementation */
+/* oAuth Signature OOP implementation 
  Nicolas KERMARC 
  www.deegr.com
  do what the fuck you want to do with it LICENSE
